@@ -1,0 +1,46 @@
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1"></i>
+      <span class="">Inicio ></span>
+      <span class="ml-1">Movimentaçoes ></span>
+      <span class="ml-1 text-blue-500">Retirar Produto</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen mt-5">
+  <h3 class="ml-8 mb-4 font-semibold">Retirada de Produto</h3>
+  <div class="flex ml-8">
+    <p-card
+      ><ng-template pTemplate="headless">
+        <div class="flex flex-row gap-8">
+          <div class="flex flex-column gap-4 mt-3">
+            <div class="flex flex-column">
+              <label>Código EAN</label>
+              <p-inputMask
+                mask="99999999999999"
+                placeholder="9999999999999"
+                [styleClass]="'w-full'"
+              />
+            </div>
+            <div class="flex flex-column">
+              <label>Quantidade</label>
+              <input pInputText min="0" />
+            </div>
+            <div class="flex flex-column">
+              <label>Motivo</label>
+              <textarea
+                rows="5"
+                cols="30"
+                pInputTextarea
+                style="resize: none"
+              ></textarea>
+            </div>
+            <div class="flex align-content-center justify-content-end">
+              <p-button label="Salvar" (onClick)="salvar()"></p-button>
+            </div>
+          </div></div></ng-template
+    ></p-card>
+  </div>
+</div>

@@ -4,16 +4,26 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
-import { ToastService } from '../../../core/services/toast.service';
-
+import { ToastService } from '../../core/services/toast.service';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputMaskModule } from 'primeng/inputmask';
 @Component({
-  selector: 'app-cadastro-produto',
+  selector: 'app-retirar-produto',
   standalone: true,
-  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule],
-  templateUrl: './cadastro-produto.component.html',
-  styleUrl: './cadastro-produto.component.scss',
+  imports: [
+    CardModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    InputTextareaModule,
+    InputNumberModule,
+    InputMaskModule,
+  ],
+  templateUrl: './retirar-produto.component.html',
+  styleUrl: './retirar-produto.component.scss',
 })
-export class CadastroProdutoComponent {
+export class RetirarProdutoComponent {
   router = inject(Router);
   toastService = inject(ToastService);
 
@@ -108,7 +118,7 @@ export class CadastroProdutoComponent {
     //if formulario valido
     this.toastService.notify(
       'Confirmaçao',
-      'Produto salvo com sucesso',
+      'Movimentaçao salva',
       'pi pi-check'
     );
     this.router.navigate(['estoque']);

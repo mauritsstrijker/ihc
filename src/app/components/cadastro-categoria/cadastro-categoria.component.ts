@@ -4,16 +4,22 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
-import { ToastService } from '../../../core/services/toast.service';
-
+import { ToastService } from '../../core/services/toast.service';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 @Component({
-  selector: 'app-cadastro-produto',
+  selector: 'app-cadastro-categoria',
   standalone: true,
-  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule],
-  templateUrl: './cadastro-produto.component.html',
-  styleUrl: './cadastro-produto.component.scss',
+  imports: [
+    CardModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    InputTextareaModule,
+  ],
+  templateUrl: './cadastro-categoria.component.html',
+  styleUrl: './cadastro-categoria.component.scss',
 })
-export class CadastroProdutoComponent {
+export class CadastroCategoriaComponent {
   router = inject(Router);
   toastService = inject(ToastService);
 
@@ -108,7 +114,7 @@ export class CadastroProdutoComponent {
     //if formulario valido
     this.toastService.notify(
       'Confirmaçao',
-      'Produto salvo com sucesso',
+      'Categoria salva com sucesso',
       'pi pi-check'
     );
     this.router.navigate(['estoque']);

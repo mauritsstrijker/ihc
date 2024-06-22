@@ -5,10 +5,17 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../../core/services/toast.service';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-cadastro-fornecedor',
   standalone: true,
-  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule],
+  imports: [
+    CardModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    TooltipModule,
+  ],
   templateUrl: './cadastro-fornecedor.component.html',
   styleUrl: './cadastro-fornecedor.component.scss',
 })
@@ -66,6 +73,30 @@ export class CadastroFornecedorComponent {
           icon: 'pi pi-minus',
           command: () => {
             this.router.navigate(['retirar/produto']);
+          },
+        },
+        {
+          label: 'Histórico',
+          icon: 'pi pi-clock',
+          command: () => {
+            this.router.navigate(['historico']);
+          },
+        },
+      ],
+    },
+    {
+      label: 'Listar',
+      items: [
+        {
+          label: 'Fornecedores',
+          command: () => {
+            this.router.navigate(['listar/fornecedor']);
+          },
+        },
+        {
+          label: 'Categorias',
+          command: () => {
+            this.router.navigate(['listar/categoriia']);
           },
         },
       ],

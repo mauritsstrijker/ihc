@@ -1,0 +1,62 @@
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1"></i>
+      <span class="">Inicio ></span>
+      <span class="ml-1">Movimentaçoes ></span>
+      <span class="ml-1 text-blue-500">Histórico</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen mt-5">
+  <h3 class="ml-8 mb-4 font-semibold">Movimentaçoes</h3>
+  <div class="flex ml-8">
+    <p-card
+      ><ng-template pTemplate="headless">
+        <p-iconField iconPosition="left" class="mr-5">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            placeholder="Pesquise por qualquer termo"
+          />
+        </p-iconField>
+        <p-calendar
+          [iconDisplay]="'input'"
+          selectionMode="range"
+          [showIcon]="true"
+          inputId="icondisplay"
+          placeholder="Selecione uma data"
+          showButtonBar="true"
+        />
+        <p-table
+          [value]="products"
+          class="mt-5"
+          paginator="true"
+          [rows]="10"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>EAN</th>
+              <th>Produto</th>
+              <th>CNPJ</th>
+              <th>Quantidade</th>
+              <th>Data</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.EAN }}</td>
+              <td>{{ product.Produto }}</td>
+              <td>{{ product.CNPJ }}</td>
+              <td>{{ product.Quantidade }}</td>
+              <td>{{ product.Data }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </ng-template></p-card
+    >
+  </div>
+</div>

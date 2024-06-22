@@ -10,10 +10,15 @@
     max-width: calc(100vw - 40px);
   }
 
+  .p-button {
+    background-color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
+  }
+
   //Font-size funciona como o scale geral da aplicação
   html {
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 14px;
     background-color: var(--surface-ground);
   }
 
