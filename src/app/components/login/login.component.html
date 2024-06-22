@@ -1,0 +1,52 @@
+<div
+  class="w-screen flex align-items-center justify-content-center h-screen container"
+>
+  <p-card class="w-30rem" [styleClass]="'p-4'">
+    <ng-template pTemplate="headless">
+      <p-tabView>
+        <p-tabPanel header="Login">
+          <div class="flex flex-column gap-4 mt-3">
+            <div class="flex flex-column">
+              <label for="username">Usuario</label>
+              <input pInputText />
+            </div>
+            <div class="flex flex-column">
+              <label for="username">Senha</label>
+              <input pInputText type="password" />
+            </div>
+            <div class="flex align-content-center justify-content-center">
+              <p-button label="Entrar" (onClick)="login()"></p-button>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Cadastro">
+          <div class="flex flex-column gap-4 mt-3">
+            <div class="flex flex-column">
+              <label for="username">Nome completo</label>
+              <input pInputText />
+            </div>
+            <div class="flex flex-column">
+              <label for="username">CNPJ/CPF</label>
+              <input pInputText maxlength="" />
+            </div>
+            <div class="flex flex-column">
+              <label for="username">Contato</label>
+              <input pInputText />
+            </div>
+            <div class="flex flex-column">
+              <label for="username">E-mail</label>
+              <input pInputText />
+            </div>
+            <div class="flex flex-column">
+              <label for="username">Senha</label>
+              <input pInputText type="password" />
+            </div>
+            <div class="flex align-content-center justify-content-center">
+              <p-button label="Cadastrar" (onClick)="cadastrar()"></p-button>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </ng-template>
+  </p-card>
+</div>

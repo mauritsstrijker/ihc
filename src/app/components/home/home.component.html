@@ -1,0 +1,81 @@
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1 text-blue-500"></i>
+      <span class="text-blue-500">Inicio</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen flex flex-row">
+  <div class="w-6 p-8">
+    <p-card>
+      <ng-template pTemplate="headless">
+        <span class="text-blue-800 text-2xl">Conheca o Estoque360</span>
+        <div class="bg-blue-700 p-2 border-round">
+          <div class="flex flex-column">
+            <span class="text-white text-2xl mb-2">
+              Seja bem-vindo ao nosso sistema
+            </span>
+            <span class="text-white">
+              Sua solucao completa para controle de estoque! Simplifique e
+              otimize sua gestao de inventario conosco. Em nossa plataforma,
+              oferecemos ferramentas intuitivas e poderesas para acompanhar,
+              gerenciar e otimizar seu estoque.
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+    <div class="flex flex-column gap-2 p-4">
+      <div>
+        <span class="text-blue-800 text-4xl font-semibold">Contato</span>
+      </div>
+      <div>
+        <i class="pi pi-phone mr-2"></i>
+        <span>(41) 99999-9999</span>
+      </div>
+      <div>
+        <i class="pi pi-envelope mr-2"></i>
+        <span>ajuda&#64;estoque360.com</span>
+      </div>
+    </div>
+  </div>
+  <div class="w-6 p-8">
+    <div class="flex flex-column">
+      <div class="w-full">
+        <span class="text-blue-800 text-4xl font-semibold">Acoes rápidas</span>
+      </div>
+      <div class="flex flex-column mt-5 gap-5">
+        <div class="flex flex-row justify-content-around">
+          <p-button [styleClass]="'w-10rem h-4rem'" label="Estoque"></p-button>
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Movimentacoes"
+          ></p-button>
+        </div>
+
+        <div class="flex flex-row justify-content-around">
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Cadastrar Produto"
+          ></p-button>
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Cadastrar Fornecedor"
+          ></p-button>
+        </div>
+        <div class="flex flex-row justify-content-around">
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Adicionar Produto"
+          ></p-button>
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Retirar Produto"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
