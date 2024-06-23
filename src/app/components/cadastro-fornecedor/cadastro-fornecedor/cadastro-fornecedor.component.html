@@ -5,57 +5,118 @@
       <span class="">Inicio ></span>
       <span class="ml-1 text-blue-500">Cadastro de Fornecedor</span>
     </div>
-    <p-menubar [model]="items" />
+    <p-menubar [model]="items"></p-menubar>
   </div>
 </div>
 <div class="w-screen mt-5">
   <h3 class="ml-8 mb-4 font-semibold">Cadastro de Fornecedor</h3>
   <div class="flex ml-8">
-    <p-card
-      ><ng-template pTemplate="headless">
+    <p-card>
+      <ng-template pTemplate="headless">
         <div class="flex flex-row">
           <div
             class="cursor-pointer mt-5 w-10rem h-10rem border-1 shadow-1 mr-8 flex justify-content-center align-items-center"
           >
             <i class="pi pi-upload text-4xl"></i>
           </div>
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <div class="flex flex-row">
-                <label class="mr-2">Razao Social</label>
-                <i
-                  pTooltip="A Razão Social é o nome jurídico ou o nome de registro de uma empresa, também chamada de denominação social, firma coletiva ou firma empresarial."
-                  class="pi pi-question-circle me-1"
-                ></i>
+          <form [formGroup]="form" (ngSubmit)="salvar()">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Razao Social</label>
+                <input
+                  pInputText
+                  formControlName="razaoSocial"
+                  placeholder=""
+                  required
+                />
               </div>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <div class="flex flex-row">
-                <label class="mr-2">Nome Fantasia</label>
-                <i
-                  pTooltip="O nome fantasia é a denominação comercial de uma empresa e corresponde ao título pelo qual ela é conhecida pelo público."
-                  class="pi pi-question-circle me-1"
-                ></i>
+              @if(form.get('razaoSocial')?.invalid &&
+              (form.get('razaoSocial')?.dirty ||
+              form.get('razaoSocial')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Razão social é
+                obrigatória
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Nome Fantasia</label>
+                <input
+                  pInputText
+                  formControlName="nomeFantasia"
+                  placeholder=""
+                  required
+                />
               </div>
-              <input pInputText />
+              @if(form.get('nomeFantasia')?.invalid &&
+              (form.get('nomeFantasia')?.dirty ||
+              form.get('nomeFantasia')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome fantasia
+                é obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>CNPJ</label>
+                <input
+                  pInputText
+                  formControlName="cnpj"
+                  placeholder="00.000.000/0000-00"
+                  required
+                  mask="00.000.000/0000-00"
+                />
+              </div>
+              @if(form.get('cnpj')?.invalid && (form.get('cnpj')?.dirty ||
+              form.get('cnpj')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>CNPJ é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Telefone</label>
+                <input
+                  pInputText
+                  formControlName="telefone"
+                  placeholder="(00) 0000-0000"
+                  required
+                  mask="(00) 0000-0000"
+                />
+              </div>
+              @if(form.get('telefone')?.invalid && (form.get('telefone')?.dirty
+              || form.get('telefone')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Telefone é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Nome do Representante</label>
+                <input
+                  pInputText
+                  formControlName="representante"
+                  placeholder=""
+                  required
+                />
+              </div>
+              @if(form.get('representante')?.invalid &&
+              (form.get('representante')?.dirty ||
+              form.get('representante')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome do
+                representante é obrigatório
+              </span>
+              }
+              <div class="flex align-content-center justify-content-center">
+                <p-button
+                  label="Salvar"
+                  (onClick)="salvar()"
+                  [disabled]="form.invalid"
+                ></p-button>
+              </div>
             </div>
-            <div class="flex flex-column">
-              <label>CNPJ</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Telefone</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Nome do Representante</label>
-              <input pInputText />
-            </div>
-            <div class="flex align-content-center justify-content-center">
-              <p-button label="Salvar" (onClick)="salvar()"></p-button>
-            </div>
-          </div></div></ng-template
-    ></p-card>
+          </form>
+        </div>
+      </ng-template>
+    </p-card>
   </div>
 </div>

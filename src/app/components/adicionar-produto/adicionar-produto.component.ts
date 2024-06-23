@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -8,6 +8,10 @@ import { ToastService } from '../../core/services/toast.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+
+
 @Component({
   selector: 'app-adicionar-produto',
   standalone: true,
@@ -19,13 +23,31 @@ import { InputMaskModule } from 'primeng/inputmask';
     InputTextareaModule,
     InputNumberModule,
     InputMaskModule,
+    ReactiveFormsModule
   ],
   templateUrl: './adicionar-produto.component.html',
   styleUrl: './adicionar-produto.component.scss',
 })
-export class AdicionarProdutoComponent {
+export class AdicionarProdutoComponent implements OnInit{
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      codigoEAN: ['', [Validators.required, Validators.pattern(/^\d{14}$/)]],
+      nomeProduto: [{ value: '', disabled: true }, Validators.required],
+      marca: [{ value: '', disabled: true }, Validators.required],
+      lote: ['', Validators.required],
+      preco: ['', Validators.required],
+      quantidade: ['', Validators.required],
+      fornecedor: ['', Validators.required],
+      nota: ['', Validators.required],
+      observacao: ['', Validators.required],
+    });
+  }
+
+  ngOnInit(): void {}
 
   items = [
     {
@@ -63,7 +85,7 @@ export class AdicionarProdutoComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -115,12 +137,17 @@ export class AdicionarProdutoComponent {
   ];
 
   salvar() {
-    //if formulario valido
+    if (this.form.valid) {
     this.toastService.notify(
       'Confirmaçao',
       'Movimentaçao salva',
       'pi pi-check'
     );
     this.router.navigate(['estoque']);
+  }else {
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
+    });
   }
+}
 }

@@ -6,77 +6,156 @@
       <span class="ml-1">Movimentaçoes ></span>
       <span class="ml-1 text-blue-500">Adicionar Produto</span>
     </div>
-    <p-menubar [model]="items" />
+    <p-menubar [model]="items"></p-menubar>
   </div>
 </div>
 <div class="w-screen mt-5">
   <h3 class="ml-8 mb-4 font-semibold">Entrada de Produto</h3>
   <div class="flex ml-8">
-    <p-card
-      ><ng-template pTemplate="headless">
-        <div class="flex flex-row gap-8">
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label>Código EAN</label>
-              <p-inputMask
-                mask="99999999999999"
-                placeholder="9999999999999"
-                [styleClass]="'w-full'"
-              />
+    <p-card>
+      <ng-template pTemplate="headless">
+        <form [formGroup]="form" (ngSubmit)="salvar()">
+          <div class="flex flex-row gap-8">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Código EAN</label>
+                <p-inputMask
+                  mask="99999999999999"
+                  placeholder="9999999999999"
+                  [styleClass]="'w-full'"
+                  formControlName="codigoEAN"
+                  required
+                ></p-inputMask>
+              </div>
+              @if (form.get('codigoEAN')?.invalid &&
+              (form.get('codigoEAN')?.dirty || form.get('codigoEAN')?.touched))
+              {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Código EAN é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Nome do produto</label>
+                <input pInputText formControlName="nomeProduto" required />
+              </div>
+              <div class="flex flex-column">
+                <label>Marca</label>
+                <input pInputText formControlName="marca" required />
+              </div>
+              <div class="flex flex-column">
+                <label>Lote</label>
+                <input pInputText formControlName="lote" required />
+              </div>
+              @if (form.get('lote')?.invalid && (form.get('lote')?.dirty ||
+              form.get('lote')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Lote é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Preço</label>
+                <p-inputNumber
+                  mode="currency"
+                  currency="BRL"
+                  locale="pt-BR"
+                  placeholder="R$ 0,00"
+                  formControlName="preco"
+                  required
+                ></p-inputNumber>
+              </div>
+              @if (form.get('preco')?.invalid && (form.get('preco')?.dirty ||
+              form.get('preco')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Preço é
+                obrigatório
+              </span>
+              }
             </div>
-            <div class="flex flex-column">
-              <label>Nome do produto</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Marca</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Lote</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Preço</label>
-              <p-inputNumber
-                mode="currency"
-                currency="BRL"
-                locale="pt-BR"
-                placeholder="R$ 0,00"
-              />
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Quantidade</label>
+                <input
+                  pInputText
+                  type="number"
+                  min="0"
+                  formControlName="quantidade"
+                  required
+                />
+              </div>
+              @if (form.get('quantidade')?.invalid &&
+              (form.get('quantidade')?.dirty ||
+              form.get('quantidade')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Quantidade é
+                obrigatória
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Fornecedor</label>
+                <select pInputText formControlName="fornecedor" required>
+                  <option value="">Selecione</option>
+                  <option value="Segalas">Segalas</option>
+                  <option value="Friboi">Friboi</option>
+                  <option value="Dequech">Dequech</option>
+                </select>
+              </div>
+              @if (form.get('fornecedor')?.invalid &&
+              (form.get('fornecedor')?.dirty ||
+              form.get('fornecedor')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Fornecedor é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Nota Fiscal</label>
+                <p-inputMask
+                  mask="999.999.999"
+                  placeholder="999.999.999"
+                  [styleClass]="'w-full'"
+                  formControlName="nota"
+                  required
+                ></p-inputMask>
+              </div>
+              @if (form.get('nota')?.invalid && (form.get('nota')?.dirty ||
+              form.get('nota')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nota Fiscal é
+                obrigatória
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Observação</label>
+                <textarea
+                  rows="5"
+                  cols="30"
+                  pInputTextarea
+                  style="resize: none"
+                  formControlName="observacao"
+                  required
+                ></textarea>
+              </div>
+              @if (form.get('observacao')?.invalid &&
+              (form.get('observacao')?.dirty ||
+              form.get('observacao')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Observação é
+                obrigatória
+              </span>
+              }
+              <div class="flex align-content-center justify-content-end">
+                <p-button
+                  label="Salvar"
+                  (onClick)="salvar()"
+                  [disabled]="form.invalid"
+                ></p-button>
+              </div>
             </div>
           </div>
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label>Quantidade</label>
-              <input pInputText type="number" min="0" />
-            </div>
-            <div class="flex flex-column">
-              <label>Fornecedor</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Nota Fiscal</label>
-              <p-inputMask
-                mask="999.999.999"
-                placeholder="999.999.999"
-                [styleClass]="'w-full'"
-              />
-            </div>
-            <div class="flex flex-column">
-              <label>Observaçao</label>
-              <textarea
-                rows="5"
-                cols="30"
-                pInputTextarea
-                style="resize: none"
-              ></textarea>
-            </div>
-
-            <div class="flex align-content-center justify-content-end">
-              <p-button label="Salvar" (onClick)="salvar()"></p-button>
-            </div>
-          </div></div></ng-template
-    ></p-card>
+        </form>
+      </ng-template>
+    </p-card>
   </div>
 </div>

@@ -15,32 +15,67 @@
     <p-card
       ><ng-template pTemplate="headless">
         <div class="flex flex-row gap-8">
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label>Código EAN</label>
-              <p-inputMask
-                mask="99999999999999"
-                placeholder="9999999999999"
-                [styleClass]="'w-full'"
-              />
+          <form [formGroup]="form" (ngSubmit)="salvar()">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Código EAN</label>
+                <p-inputMask
+                  mask="99999999999999"
+                  placeholder="9999999999999"
+                  [styleClass]="'w-full'"
+                  formControlName="ean"
+                />
+              </div>
+              @if(form.get('ean')?.invalid && (form.get('ean')?.dirty ||
+              form.get('ean')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>Código EAN é
+                obrigatório</span
+              >
+              }
+              <div class="flex flex-column">
+                <label>Quantidade</label>
+                <input
+                  pInputText
+                  type="number"
+                  min="0"
+                  formControlName="quantidade"
+                />
+              </div>
+              @if(form.get('quantidade')?.invalid &&
+              (form.get('quantidade')?.dirty ||
+              form.get('quantidade')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>A quantidade
+                é obrigatória</span
+              >
+              }
+              <div class="flex flex-column">
+                <label>Motivo</label>
+                <textarea
+                  rows="5"
+                  cols="30"
+                  pInputTextarea
+                  style="resize: none"
+                  formControlName="motivo"
+                ></textarea>
+              </div>
+              @if(form.get('motivo')?.invalid && (form.get('motivo')?.dirty ||
+              form.get('motivo')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>O motivo é
+                obrigatório</span
+              >
+              }
+              <div class="flex align-content-center justify-content-end">
+                <p-button
+                  label="Salvar"
+                  (onClick)="salvar()"
+                  [disabled]="form.invalid"
+                ></p-button>
+              </div>
             </div>
-            <div class="flex flex-column">
-              <label>Quantidade</label>
-              <input pInputText min="0" />
-            </div>
-            <div class="flex flex-column">
-              <label>Motivo</label>
-              <textarea
-                rows="5"
-                cols="30"
-                pInputTextarea
-                style="resize: none"
-              ></textarea>
-            </div>
-            <div class="flex align-content-center justify-content-end">
-              <p-button label="Salvar" (onClick)="salvar()"></p-button>
-            </div>
-          </div></div></ng-template
+          </form></div></ng-template
     ></p-card>
   </div>
 </div>

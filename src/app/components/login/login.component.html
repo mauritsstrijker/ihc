@@ -5,46 +5,124 @@
     <ng-template pTemplate="headless">
       <p-tabView>
         <p-tabPanel header="Login">
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label for="username">Usuario</label>
-              <input pInputText />
+          <form [formGroup]="formLogin" (ngSubmit)="login()">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label for="username">Usuario</label>
+                <input pInputText formControlName="usuario" required />
+              </div>
+              @if(formLogin.get('usuario')?.invalid &&
+              (formLogin.get('usuario')?.dirty ||
+              formLogin.get('usuario')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Usuario é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label for="senha">Senha</label>
+                <input
+                  pInputText
+                  type="password"
+                  formControlName="senha"
+                  required
+                />
+              </div>
+              @if(formLogin.get('senha')?.invalid &&
+              (formLogin.get('senha')?.dirty ||
+              formLogin.get('senha')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Senha é
+                obrigatória
+              </span>
+              }
+              <div class="flex align-content-center justify-content-center">
+                <p-button
+                  label="Entrar"
+                  (onClick)="login()"
+                  [disabled]="formLogin.invalid"
+                ></p-button>
+              </div>
             </div>
-            <div class="flex flex-column">
-              <label for="username">Senha</label>
-              <input pInputText type="password" />
-            </div>
-            <div class="flex align-content-center justify-content-center">
-              <p-button label="Entrar" (onClick)="login()"></p-button>
-            </div>
-          </div>
+          </form>
         </p-tabPanel>
         <p-tabPanel header="Cadastro">
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label for="username">Nome completo</label>
-              <input pInputText />
+          <form [formGroup]="formCadastro" (ngSubmit)="cadastrar()">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label for="nome">Nome completo</label>
+                <input pInputText formControlName="nome" required />
+              </div>
+              @if(formCadastro.get('nome')?.invalid &&
+              (formCadastro.get('nome')?.dirty ||
+              formCadastro.get('nome')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label for="cnpj">CNPJ/CPF</label>
+                <input pInputText formControlName="cnpj" required />
+              </div>
+              @if(formCadastro.get('cnpj')?.invalid &&
+              (formCadastro.get('cnpj')?.dirty ||
+              formCadastro.get('cnpj')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>CNPJ/CPF é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label for="contato">Contato</label>
+                <input pInputText formControlName="contato" required />
+              </div>
+              @if(formCadastro.get('contato')?.invalid &&
+              (formCadastro.get('contato')?.dirty ||
+              formCadastro.get('contato')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Contato é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label for="email">E-mail</label>
+                <input pInputText formControlName="email" required />
+              </div>
+              @if(formCadastro.get('email')?.invalid &&
+              (formCadastro.get('email')?.dirty ||
+              formCadastro.get('email')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>E-mail é
+                obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label for="senha">Senha</label>
+                <input
+                  pInputText
+                  type="password"
+                  formControlName="senha"
+                  required
+                />
+              </div>
+              @if(formCadastro.get('senha')?.invalid &&
+              (formCadastro.get('senha')?.dirty ||
+              formCadastro.get('senha')?.touched)) {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Senha é
+                obrigatória
+              </span>
+              }
+              <div class="flex align-content-center justify-content-center">
+                <p-button
+                  label="Cadastrar"
+                  (onClick)="cadastrar()"
+                  [disabled]="formCadastro.invalid"
+                ></p-button>
+              </div>
             </div>
-            <div class="flex flex-column">
-              <label for="username">CNPJ/CPF</label>
-              <input pInputText maxlength="" />
-            </div>
-            <div class="flex flex-column">
-              <label for="username">Contato</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label for="username">E-mail</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label for="username">Senha</label>
-              <input pInputText type="password" />
-            </div>
-            <div class="flex align-content-center justify-content-center">
-              <p-button label="Cadastrar" (onClick)="cadastrar()"></p-button>
-            </div>
-          </div>
+          </form>
         </p-tabPanel>
       </p-tabView>
     </ng-template>

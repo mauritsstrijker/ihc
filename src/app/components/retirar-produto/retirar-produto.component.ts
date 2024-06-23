@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -8,6 +8,8 @@ import { ToastService } from '../../core/services/toast.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
 @Component({
   selector: 'app-retirar-produto',
   standalone: true,
@@ -19,13 +21,25 @@ import { InputMaskModule } from 'primeng/inputmask';
     InputTextareaModule,
     InputNumberModule,
     InputMaskModule,
+    ReactiveFormsModule
   ],
   templateUrl: './retirar-produto.component.html',
   styleUrl: './retirar-produto.component.scss',
 })
-export class RetirarProdutoComponent {
+export class RetirarProdutoComponent implements OnInit{
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      ean: ['', Validators.required],
+      quantidade: ['', Validators.required],
+      motivo: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {}
 
   items = [
     {
@@ -63,7 +77,7 @@ export class RetirarProdutoComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -115,12 +129,17 @@ export class RetirarProdutoComponent {
   ];
 
   salvar() {
-    //if formulario valido
+    if (this.form.valid) {
     this.toastService.notify(
       'Confirmaçao',
       'Movimentaçao salva',
       'pi pi-check'
     );
     this.router.navigate(['estoque']);
+  }else {
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
+    });
   }
+}
 }
