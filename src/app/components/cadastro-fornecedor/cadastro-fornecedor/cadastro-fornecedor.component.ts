@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../../core/services/toast.service';
-import { TooltipModule } from 'primeng/tooltip';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
 @Component({
   selector: 'app-cadastro-fornecedor',
   standalone: true,
@@ -14,15 +16,30 @@ import { TooltipModule } from 'primeng/tooltip';
     ButtonModule,
     MenubarModule,
     InputTextModule,
-    TooltipModule,
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
+  providers: [provideNgxMask()],
   templateUrl: './cadastro-fornecedor.component.html',
-  styleUrl: './cadastro-fornecedor.component.scss',
+  styleUrls: ['./cadastro-fornecedor.component.scss'],
 })
 export class CadastroFornecedorComponent {
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
 
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      razaoSocial: ['', Validators.required],
+      nomeFantasia: ['', Validators.required],
+      cnpj: ['', Validators.required],
+      telefone: ['', Validators.required],
+      representante: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {}
   items = [
     {
       label: 'Home',
@@ -111,12 +128,17 @@ export class CadastroFornecedorComponent {
   ];
 
   salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Fornecedor salvo com sucesso',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
+    if (this.form.valid) {
+      this.toastService.notify(
+        'Confirmação',
+        'Produto salvo com sucesso',
+        'pi pi-check'
+      );
+      this.router.navigate(['estoque']);
+    } else {
+      Object.values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
   }
 }

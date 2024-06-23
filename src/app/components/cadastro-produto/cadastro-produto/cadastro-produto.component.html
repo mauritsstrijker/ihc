@@ -5,45 +5,104 @@
       <span class="">Inicio ></span>
       <span class="ml-1 text-blue-500">Cadastro de Produto</span>
     </div>
-    <p-menubar [model]="items" />
+    <p-menubar [model]="items"></p-menubar>
   </div>
 </div>
 <div class="w-screen mt-5">
   <h3 class="ml-8 mb-4 font-semibold">Cadastro de Produto</h3>
   <div class="flex ml-8">
-    <p-card
-      ><ng-template pTemplate="headless">
+    <p-card>
+      <ng-template pTemplate="headless">
         <div class="flex flex-row">
           <div
             class="cursor-pointer mt-5 w-10rem h-10rem border-1 shadow-1 mr-8 flex justify-content-center align-items-center"
           >
             <i class="pi pi-upload text-4xl"></i>
           </div>
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label>Código EAN</label>
-              <input pInputText />
+          <form [formGroup]="form" (ngSubmit)="salvar()">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Código EAN</label>
+                <input pInputText formControlName="codigoEAN" required />
+              </div>
+              @if(form.get('codigoEAN')?.invalid &&
+              (form.get('codigoEAN')?.dirty || form.get('codigoEAN')?.touched))
+              {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>Valor do
+                código EAN é obrigatório</span
+              >
+              }
+
+              <div class="flex flex-column">
+                <label>Nome do Produto</label>
+                <input pInputText formControlName="nomeProduto" required />
+              </div>
+              @if(form.get('nomeProduto')?.invalid &&
+              (form.get('nomeProduto')?.dirty ||
+              form.get('nomeProduto')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>O nome do
+                produto é obrigatório</span
+              >
+              }
+              <div class="flex flex-column">
+                <label>Quantidade mínima</label>
+                <input
+                  type="number"
+                  pInputText
+                  formControlName="quantidadeMinima"
+                />
+              </div>
+              @if(form.get('quantidadeMinima')?.invalid &&
+              (form.get('quantidadeMinima')?.dirty ||
+              form.get('quantidadeMinima')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>Quantidade
+                mínima do produto é obrigatório</span
+              >
+              }
+              <div class="flex flex-column">
+                <label>Categoria</label>
+                <select formControlName="categoria" pInputText>
+                  <option value="Selecione" disabled selected>Selecione</option>
+                  <option value="Limpeza">Limpeza</option>
+                  <option value="Segurança">Segurança</option>
+                  <option value="Alimentação">Alimentação</option>
+                  <option value="Condimentos">Condimentos</option>
+                </select>
+              </div>
+              @if(form.get('categoria')?.invalid &&
+              (form.get('categoria')?.dirty || form.get('categoria')?.touched))
+              {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>Categoria é
+                obrigatória</span
+              >
+              }
+              <div class="flex flex-column">
+                <label>Fornecedor</label>
+                <input pInputText formControlName="fornecedor" />
+              </div>
+              @if(form.get('fornecedor')?.invalid &&
+              (form.get('fornecedor')?.dirty ||
+              form.get('fornecedor')?.touched)) {
+              <span class="error-text"
+                ><i class="pi pi-exclamation-circle me-1 mr-2"></i>Fornecedor é
+                obrigatória</span
+              >
+              }
+              <div class="flex align-content-center justify-content-center">
+                <p-button
+                  label="Salvar"
+                  type="submit"
+                  [disabled]="form.invalid"
+                ></p-button>
+              </div>
             </div>
-            <div class="flex flex-column">
-              <label>Nome do Produto</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Quantidade mínima</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Categoria</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Fornecedor</label>
-              <input pInputText />
-            </div>
-            <div class="flex align-content-center justify-content-center">
-              <p-button label="Salvar" (onClick)="salvar()"></p-button>
-            </div>
-          </div></div></ng-template
-    ></p-card>
+          </form>
+        </div>
+      </ng-template>
+    </p-card>
   </div>
 </div>

@@ -1,21 +1,35 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../core/services/toast.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
-import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-cadastro-produto',
   standalone: true,
-  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule],
+  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule, ReactiveFormsModule],
   templateUrl: './cadastro-produto.component.html',
-  styleUrl: './cadastro-produto.component.scss',
+  styleUrls: ['./cadastro-produto.component.scss'],
 })
-export class CadastroProdutoComponent {
+export class CadastroProdutoComponent implements OnInit {
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      codigoEAN: ['', Validators.required],
+      nomeProduto: ['', Validators.required],
+      quantidadeMinima: ['', Validators.required],
+      categoria: ['', Validators.required],
+      fornecedor: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {}
 
   items = [
     {
@@ -103,14 +117,19 @@ export class CadastroProdutoComponent {
       },
     },
   ];
-
+  
   salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Produto salvo com sucesso',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
+    if (this.form.valid) {
+      this.toastService.notify(
+        'Confirmação',
+        'Produto salvo com sucesso',
+        'pi pi-check'
+      );
+      this.router.navigate(['estoque']);
+    } else {
+      Object.values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
   }
 }
