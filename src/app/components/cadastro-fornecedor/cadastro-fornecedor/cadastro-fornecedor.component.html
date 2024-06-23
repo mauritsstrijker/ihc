@@ -5,7 +5,7 @@
       <span class="">Inicio ></span>
       <span class="ml-1 text-blue-500">Cadastro de Fornecedor</span>
     </div>
-    <p-menubar [model]="items" />
+    <p-menubar [model]="items"></p-menubar>
   </div>
 </div>
 <div class="w-screen mt-5">
@@ -30,14 +30,17 @@
                   required
                 />
               </div>
-              @if(form.get('razaoSocial')?.invalid &&
-              (form.get('razaoSocial')?.dirty ||
-              form.get('razaoSocial')?.touched)) {
-              <span class="error-text">
-                <i class="pi pi-exclamation-circle me-1"> </i>Razão social é
+              <span
+                *ngIf="
+                  form.get('razaoSocial')?.invalid &&
+                  (form.get('razaoSocial')?.dirty ||
+                    form.get('razaoSocial')?.touched)
+                "
+                class="error-text"
+              >
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Razão social é
                 obrigatória
               </span>
-              }
               <div class="flex flex-column">
                 <label>Nome Fantasia</label>
                 <input
@@ -47,14 +50,17 @@
                   required
                 />
               </div>
-              @if(form.get('nomeFantasia')?.invalid &&
-              (form.get('nomeFantasia')?.dirty ||
-              form.get('nomeFantasia')?.touched)) {
-              <span class="error-text">
-                <i class="pi pi-exclamation-circle me-1"></i>Nome fantasia é
-                obrigatório
+              <span
+                *ngIf="
+                  form.get('nomeFantasia')?.invalid &&
+                  (form.get('nomeFantasia')?.dirty ||
+                    form.get('nomeFantasia')?.touched)
+                "
+                class="error-text"
+              >
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome fantasia
+                é obrigatório
               </span>
-              }
               <div class="flex flex-column">
                 <label>CNPJ</label>
                 <input
@@ -62,30 +68,39 @@
                   formControlName="cnpj"
                   placeholder="00.000.000/0000-00"
                   required
+                  mask="00.000.000/0000-00"
                 />
               </div>
-              @if(form.get('cnpj')?.invalid && (form.get('cnpj')?.dirty ||
-              form.get('cnpj')?.touched)) {
-              <span class="error-text">
-                <i class="pi pi-exclamation-circle me-1"></i>CNPJ é obrigatório
+              <span
+                *ngIf="
+                  form.get('cnpj')?.invalid &&
+                  (form.get('cnpj')?.dirty || form.get('cnpj')?.touched)
+                "
+                class="error-text"
+              >
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>CNPJ é
+                obrigatório
               </span>
-              }
               <div class="flex flex-column">
                 <label>Telefone</label>
                 <input
                   pInputText
                   formControlName="telefone"
-                  placeholder="(00) 0000-000"
+                  placeholder="(00) 0000-0000"
                   required
+                  mask="(00) 0000-0000"
                 />
               </div>
-              @if(form.get('telefone')?.invalid && (form.get('telefone')?.dirty
-              || form.get('telefone')?.touched)) {
-              <span class="error-text">
-                <i class="pi pi-exclamation-circle me-1"></i>Telefone é
+              <span
+                *ngIf="
+                  form.get('telefone')?.invalid &&
+                  (form.get('telefone')?.dirty || form.get('telefone')?.touched)
+                "
+                class="error-text"
+              >
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Telefone é
                 obrigatório
               </span>
-              }
               <div class="flex flex-column">
                 <label>Nome do Representante</label>
                 <input
@@ -95,14 +110,17 @@
                   required
                 />
               </div>
-              @if(form.get('representante')?.invalid &&
-              (form.get('representante')?.dirty ||
-              form.get('representante')?.touched)) {
-              <span class="error-text">
-                <i class="pi pi-exclamation-circle me-1"></i>Nome do
+              <span
+                *ngIf="
+                  form.get('representante')?.invalid &&
+                  (form.get('representante')?.dirty ||
+                    form.get('representante')?.touched)
+                "
+                class="error-text"
+              >
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome do
                 representante é obrigatório
               </span>
-              }
               <div class="flex align-content-center justify-content-center">
                 <p-button
                   label="Salvar"

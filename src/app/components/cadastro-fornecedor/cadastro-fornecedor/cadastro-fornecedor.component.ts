@@ -5,15 +5,26 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../../core/services/toast.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
 @Component({
   selector: 'app-cadastro-fornecedor',
   standalone: true,
-  imports: [CardModule, ButtonModule, MenubarModule, InputTextModule, ReactiveFormsModule],
+  imports: [
+    CardModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [provideNgxMask()],
   templateUrl: './cadastro-fornecedor.component.html',
-  styleUrl: './cadastro-fornecedor.component.scss',
+  styleUrls: ['./cadastro-fornecedor.component.scss'],
 })
-export class CadastroFornecedorComponent implements OnInit{
+export class CadastroFornecedorComponent implements OnInit {
   router = inject(Router);
   toastService = inject(ToastService);
   form!: FormGroup;
@@ -29,6 +40,7 @@ export class CadastroFornecedorComponent implements OnInit{
   }
 
   ngOnInit(): void {}
+
   items = [
     {
       label: 'Home',
@@ -91,7 +103,6 @@ export class CadastroFornecedorComponent implements OnInit{
       },
     },
   ];
-
 
   salvar() {
     if (this.form.valid) {
