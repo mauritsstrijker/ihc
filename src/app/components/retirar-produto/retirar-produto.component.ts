@@ -100,7 +100,7 @@ export class RetirarProdutoComponent {
         {
           label: 'Categorias',
           command: () => {
-            this.router.navigate(['listar/categoriia']);
+            this.router.navigate(['listar/categoria']);
           },
         },
       ],

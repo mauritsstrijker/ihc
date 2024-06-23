@@ -14,8 +14,10 @@ import { InputIconModule } from 'primeng/inputicon';
 import { CalendarModule } from 'primeng/calendar';
 import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @Component({
-  selector: 'app-historico-movimentacao',
+  selector: 'app-listar-fornecedor',
   standalone: true,
   imports: [
     CardModule,
@@ -31,125 +33,107 @@ import { CommonModule } from '@angular/common';
     CalendarModule,
     DatePipe,
     CommonModule,
+    ConfirmDialogModule,
+    ButtonModule,
   ],
-  templateUrl: './historico-movimentacao.component.html',
-  styleUrl: './historico-movimentacao.component.scss',
+  templateUrl: './listar-fornecedor.component.html',
+  styleUrl: './listar-fornecedor.component.scss',
 })
-export class HistoricoMovimentacaoComponent {
+export class ListarFornecedorComponent {
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
+
   router = inject(Router);
   toastService = inject(ToastService);
 
-  getRowClass() {
-    return Math.random() < 0.5 ? 'bg-blue-200' : 'bg-red-200';
+  confirm2(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Voce deseja deletar este fornecedor?',
+      header: 'Confirmaçao',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'bg-green-600 p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+
+      accept: () => {
+        this.toastService.notify(
+          'Confirmaçao',
+          'Fornecedor deletado com sucesso.'
+        );
+      },
+    });
   }
 
-  products = [
+  fornecedores = [
     {
-      EAN: '7891234567891',
-      Produto: 'Arroz',
-      CNPJ: '12.345.678/0001-99',
-      Quantidade: 100,
-      Data: '2024-06-01',
+      nome: 'Empresa A',
+      razao: 'Empresa A Ltda',
+      cnpj: '00.000.000/0001-00',
+      telefone: '(11) 1111-1111',
     },
     {
-      EAN: '7891234567892',
-      Produto: 'Feijão',
-      CNPJ: '12.345.678/0002-88',
-      Quantidade: 50,
-      Data: '2024-06-02',
+      nome: 'Empresa B',
+      razao: 'Empresa B Ltda',
+      cnpj: '00.000.000/0002-00',
+      telefone: '(11) 2222-2222',
     },
     {
-      EAN: '7891234567893',
-      Produto: 'Macarrão',
-      CNPJ: '12.345.678/0003-77',
-      Quantidade: 200,
-      Data: '2024-06-03',
+      nome: 'Empresa C',
+      razao: 'Empresa C Ltda',
+      cnpj: '00.000.000/0003-00',
+      telefone: '(11) 3333-3333',
     },
     {
-      EAN: '7891234567894',
-      Produto: 'Óleo de Soja',
-      CNPJ: '12.345.678/0004-66',
-      Quantidade: 75,
-      Data: '2024-06-04',
+      nome: 'Empresa D',
+      razao: 'Empresa D Ltda',
+      cnpj: '00.000.000/0004-00',
+      telefone: '(11) 4444-4444',
     },
     {
-      EAN: '7891234567895',
-      Produto: 'Açúcar',
-      CNPJ: '12.345.678/0005-55',
-      Quantidade: 150,
-      Data: '2024-06-05',
+      nome: 'Empresa E',
+      razao: 'Empresa E Ltda',
+      cnpj: '00.000.000/0005-00',
+      telefone: '(11) 5555-5555',
     },
     {
-      EAN: '7891234567891',
-      Produto: 'Arroz',
-      CNPJ: '12.345.678/0001-99',
-      Quantidade: 100,
-      Data: '2024-06-01',
+      nome: 'Empresa F',
+      razao: 'Empresa F Ltda',
+      cnpj: '00.000.000/0006-00',
+      telefone: '(11) 6666-6666',
     },
     {
-      EAN: '7891234567892',
-      Produto: 'Feijão',
-      CNPJ: '12.345.678/0002-88',
-      Quantidade: 50,
-      Data: '2024-06-02',
+      nome: 'Empresa G',
+      razao: 'Empresa G Ltda',
+      cnpj: '00.000.000/0007-00',
+      telefone: '(11) 7777-7777',
     },
     {
-      EAN: '7891234567893',
-      Produto: 'Macarrão',
-      CNPJ: '12.345.678/0003-77',
-      Quantidade: 200,
-      Data: '2024-06-03',
+      nome: 'Empresa H',
+      razao: 'Empresa H Ltda',
+      cnpj: '00.000.000/0008-00',
+      telefone: '(11) 8888-8888',
     },
     {
-      EAN: '7891234567894',
-      Produto: 'Óleo de Soja',
-      CNPJ: '12.345.678/0004-66',
-      Quantidade: 75,
-      Data: '2024-06-04',
+      nome: 'Empresa I',
+      razao: 'Empresa I Ltda',
+      cnpj: '00.000.000/0009-00',
+      telefone: '(11) 9999-9999',
     },
     {
-      EAN: '7891234567895',
-      Produto: 'Açúcar',
-      CNPJ: '12.345.678/0005-55',
-      Quantidade: 150,
-      Data: '2024-06-05',
-    },
-    {
-      EAN: '7891234567891',
-      Produto: 'Arroz',
-      CNPJ: '12.345.678/0001-99',
-      Quantidade: 100,
-      Data: '2024-06-01',
-    },
-    {
-      EAN: '7891234567892',
-      Produto: 'Feijão',
-      CNPJ: '12.345.678/0002-88',
-      Quantidade: 50,
-      Data: '2024-06-02',
-    },
-    {
-      EAN: '7891234567893',
-      Produto: 'Macarrão',
-      CNPJ: '12.345.678/0003-77',
-      Quantidade: 200,
-      Data: '2024-06-03',
-    },
-    {
-      EAN: '7891234567894',
-      Produto: 'Óleo de Soja',
-      CNPJ: '12.345.678/0004-66',
-      Quantidade: 75,
-      Data: '2024-06-04',
-    },
-    {
-      EAN: '7891234567895',
-      Produto: 'Açúcar',
-      CNPJ: '12.345.678/0005-55',
-      Quantidade: 150,
-      Data: '2024-06-05',
+      nome: 'Empresa J',
+      razao: 'Empresa J Ltda',
+      cnpj: '00.000.000/0010-00',
+      telefone: '(11) 1010-1010',
     },
   ];
+
+  excluir() {
+    this.toastService.notify('Confirmaçao', 'Fornecedor deletado com sucesso!');
+  }
 
   items = [
     {
@@ -238,13 +222,13 @@ export class HistoricoMovimentacaoComponent {
     },
   ];
 
-  salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Movimentaçao salva',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
-  }
+  // salvar() {
+  //   //if formulario valido
+  //   this.toastService.notify(
+  //     'Confirmaçao',
+  //     'Movimentaçao salva',
+  //     'pi pi-check'
+  //   );
+  //   this.router.navigate(['estoque']);
+  // }
 }

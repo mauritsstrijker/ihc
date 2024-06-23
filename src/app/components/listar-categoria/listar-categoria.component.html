@@ -1,0 +1,124 @@
+<p-confirmDialog />
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1"></i>
+      <span class="">Inicio ></span>
+      <span class="ml-1">Listagem ></span>
+      <span class="ml-1 text-blue-500">Categoria</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen mt-5">
+  <h3 class="ml-8 mb-4 font-semibold">Listagem de Categoria</h3>
+  <div class="flex ml-8">
+    <p-card
+      ><ng-template pTemplate="headless">
+        <p-iconField iconPosition="left" class="mr-5">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input type="text" pInputText placeholder="Pesquisar por categoria" />
+        </p-iconField>
+
+        <p-table
+          [value]="categorias"
+          paginator="true"
+          [rows]="5"
+          dataKey="id"
+          editMode="row"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Categoria</th>
+              <th>Descriçao</th>
+
+              <th class="flex justify-content-center align-items-center">
+                Açoes
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-product
+            let-editing="editing"
+            let-ri="rowIndex"
+          >
+            <tr [pEditableRow]="product">
+              <td>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{ product.nome }}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" required />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{ product.descricao }}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+
+              <td>
+                <div
+                  class="flex align-items-center justify-content-center gap-2"
+                >
+                  <button
+                    *ngIf="!editing"
+                    pButton
+                    pRipple
+                    type="button"
+                    pInitEditableRow
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-text"
+                  ></button>
+                  <p-button
+                    *ngIf="!editing"
+                    pButton
+                    styleClass="text-red-500"
+                    pRipple
+                    type="button"
+                    icon="pi pi-trash"
+                    (click)="confirm2($event)"
+                    class="p-button-rounded p-button-text"
+                  ></p-button>
+                  <p-button
+                    *ngIf="editing"
+                    pButton
+                    pRipple
+                    styleClass="text-green-400"
+                    type="button"
+                    (onClick)="
+                      this.toastService.notify(
+                        'Confirmaçao',
+                        'Categoria editada com sucesso!'
+                      )
+                    "
+                    pSaveEditableRow
+                    icon="pi pi-check"
+                    class="p-button-rounded p-button-text p-button-success mr-2"
+                  ></p-button>
+                  <button
+                    *ngIf="editing"
+                    pButton
+                    pRipple
+                    type="button"
+                    pCancelEditableRow
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-text p-button-danger"
+                  ></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table> </ng-template
+    ></p-card>
+  </div>
+</div>

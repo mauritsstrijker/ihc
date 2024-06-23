@@ -8,8 +8,16 @@ import { ToastService } from '../../core/services/toast.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { TableModule } from 'primeng/table';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { CalendarModule } from 'primeng/calendar';
+import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @Component({
-  selector: 'app-adicionar-produto',
+  selector: 'app-listar-categoria',
   standalone: true,
   imports: [
     CardModule,
@@ -19,13 +27,85 @@ import { InputMaskModule } from 'primeng/inputmask';
     InputTextareaModule,
     InputNumberModule,
     InputMaskModule,
+    TableModule,
+    IconFieldModule,
+    InputIconModule,
+    CalendarModule,
+    DatePipe,
+    CommonModule,
+    ConfirmDialogModule,
+    ButtonModule,
   ],
-  templateUrl: './adicionar-produto.component.html',
-  styleUrl: './adicionar-produto.component.scss',
+  templateUrl: './listar-categoria.component.html',
+  styleUrl: './listar-categoria.component.scss',
 })
-export class AdicionarProdutoComponent {
+export class ListarCategoriaComponent {
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
+
   router = inject(Router);
   toastService = inject(ToastService);
+
+  confirm2(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Voce deseja deletar esta categoria?',
+      header: 'Confirmaçao',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'bg-green-600 p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+
+      accept: () => {
+        this.toastService.notify(
+          'Confirmaçao',
+          'Categoria deletada com sucesso.'
+        );
+      },
+    });
+  }
+
+  categorias = [
+    {
+      nome: 'Tecnologia',
+      descricao: 'Tudo sobre tecnologia, gadgets e inovações.',
+    },
+    {
+      nome: 'Saúde',
+      descricao: 'Dicas e informações sobre saúde e bem-estar.',
+    },
+    {
+      nome: 'Educação',
+      descricao: 'Recursos e notícias sobre educação e aprendizado.',
+    },
+    {
+      nome: 'Esportes',
+      descricao: 'Últimas notícias e atualizações sobre o mundo dos esportes.',
+    },
+    {
+      nome: 'Entretenimento',
+      descricao: 'Novidades sobre filmes, séries, música e cultura pop.',
+    },
+    {
+      nome: 'Negócios',
+      descricao: 'Informações sobre economia, empresas e finanças.',
+    },
+    {
+      nome: 'Viagem',
+      descricao: 'Dicas de viagem, destinos e experiências ao redor do mundo.',
+    },
+    {
+      nome: 'Culinária',
+      descricao: 'Receitas, dicas e novidades do mundo gastronômico.',
+    },
+  ];
+
+  excluir() {
+    this.toastService.notify('Confirmaçao', 'Fornecedor deletado com sucesso!');
+  }
 
   items = [
     {
@@ -114,13 +194,13 @@ export class AdicionarProdutoComponent {
     },
   ];
 
-  salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Movimentaçao salva',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
-  }
+  // salvar() {
+  //   //if formulario valido
+  //   this.toastService.notify(
+  //     'Confirmaçao',
+  //     'Movimentaçao salva',
+  //     'pi pi-check'
+  //   );
+  //   this.router.navigate(['estoque']);
+  // }
 }

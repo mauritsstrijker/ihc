@@ -47,12 +47,12 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-product>
-            <tr>
+            <tr [ngClass]="getRowClass()">
               <td>{{ product.EAN }}</td>
               <td>{{ product.Produto }}</td>
               <td>{{ product.CNPJ }}</td>
               <td>{{ product.Quantidade }}</td>
-              <td>{{ product.Data }}</td>
+              <td>{{ product.Data | date : "dd/MM/yyyy" }}</td>
             </tr>
           </ng-template>
         </p-table>

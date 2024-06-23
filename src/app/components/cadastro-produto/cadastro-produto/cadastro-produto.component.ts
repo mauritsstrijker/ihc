@@ -90,7 +90,7 @@ export class CadastroProdutoComponent {
         {
           label: 'Categorias',
           command: () => {
-            this.router.navigate(['listar/categoriia']);
+            this.router.navigate(['listar/categoria']);
           },
         },
       ],

@@ -5,27 +5,42 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../core/services/toast.service';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
+
 @Component({
-  selector: 'app-adicionar-produto',
+  selector: 'app-estoque',
   standalone: true,
   imports: [
     CardModule,
     ButtonModule,
     MenubarModule,
     InputTextModule,
-    InputTextareaModule,
-    InputNumberModule,
-    InputMaskModule,
+    DropdownModule,
   ],
-  templateUrl: './adicionar-produto.component.html',
-  styleUrl: './adicionar-produto.component.scss',
+  templateUrl: './estoque.component.html',
+  styleUrl: './estoque.component.scss',
 })
-export class AdicionarProdutoComponent {
+export class EstoqueComponent {
   router = inject(Router);
   toastService = inject(ToastService);
+
+  products = [
+    { name: 'Molho de Tomate Qero', quantity: 120 },
+    { name: 'Nesquick Morangi', quantity: 70 },
+    { name: 'Dr Músculo Desinfetante', quantity: 60 },
+    { name: 'Coca Cola 2L', quantity: 45 },
+    { name: 'Inseticida SBP', quantity: 30 },
+    { name: 'Água Mineral Cristal', quantity: 200 },
+    { name: 'Papel Higiênico Neve', quantity: 70 },
+    { name: 'Danone Vigor Morango', quantity: 35 },
+  ];
+
+  filterOptions = [
+    { label: 'Categoria', value: 'categoria' },
+    { label: 'Fornecedor', value: 'fornecedor' },
+    { label: 'Quantidade', value: 'quantidade' },
+    { label: 'Ordem Alfabética', value: 'alfabetica' },
+  ];
 
   items = [
     {
@@ -118,7 +133,7 @@ export class AdicionarProdutoComponent {
     //if formulario valido
     this.toastService.notify(
       'Confirmaçao',
-      'Movimentaçao salva',
+      'Produto salvo com sucesso',
       'pi pi-check'
     );
     this.router.navigate(['estoque']);

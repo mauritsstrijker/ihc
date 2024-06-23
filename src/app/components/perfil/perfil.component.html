@@ -1,0 +1,95 @@
+<p-confirmDialog />
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1"></i>
+      <span class="">Inicio ></span>
+      <span class="ml-1 text-blue-500">Perfil</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen mt-5">
+  <h3 class="ml-8 mb-4 font-semibold">Perfil</h3>
+  <div class="flex ml-8">
+    <div class="p-m-4">
+      <div class="flex-column flex">
+        <div class="flex flex-column gap-5">
+          <div class="flex flex-row gap-5">
+            <div class="p-col">
+              <p-card header="Dados">
+                <div class="p-fluid">
+                  <div class="p-field">
+                    <label for="nome">Nome Completo</label>
+                    <input id="nome" type="text" pInputText />
+                  </div>
+                  <div class="p-field">
+                    <label for="cnpj">CNPJ</label>
+                    <input id="cnpj" type="text" pInputText />
+                  </div>
+                  <div class="p-field">
+                    <label for="contato">Contato</label>
+                    <input id="contato" type="text" pInputText />
+                  </div>
+                  <div class="p-field mb-2">
+                    <label for="email">E-mail</label>
+                    <input id="email" type="text" pInputText />
+                  </div>
+                  <p-button
+                    pButton
+                    type="button"
+                    label="Salvar"
+                    (onClick)="this.toastService.notify('', '')"
+                    class="p-button-warning"
+                  ></p-button>
+                </div>
+              </p-card>
+            </div>
+
+            <div class="p-col">
+              <p-card header="Atualizar senha">
+                <div class="p-fluid">
+                  <div class="p-field">
+                    <label for="senha-atual">Senha atual</label>
+                    <input id="senha-atual" type="password" pInputText />
+                  </div>
+                  <div class="p-field">
+                    <label for="nova-senha">Nova senha</label>
+                    <input id="nova-senha" type="password" pInputText />
+                  </div>
+                  <div class="p-field mb-2">
+                    <label for="confirmar-senha">Confirme a nova senha</label>
+                    <input id="confirmar-senha" type="password" pInputText />
+                  </div>
+                  <p-button
+                    (onClick)="this.toastService.notify('', '')"
+                    pButton
+                    type="button"
+                    label="Salvar"
+                    class="p-button-warning"
+                  ></p-button>
+                </div>
+              </p-card>
+            </div>
+          </div>
+
+          <div class="p-col">
+            <p-card header="Delete sua conta">
+              <p class="mb-2">
+                Depois que sua conta for excluída, todos os seus recursos e
+                dados serão excluídos permanentemente.
+              </p>
+              <p-button
+                pButton
+                type="button"
+                label="Deletar Conta"
+                class="p-button-danger"
+                (click)="confirm2($event)"
+              ></p-button>
+            </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

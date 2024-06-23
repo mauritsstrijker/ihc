@@ -1,0 +1,57 @@
+<div class="h-3rem shadow-1 p-5">
+  <div class="h-full flex align-items-center justify-content-between ml-5">
+    <div>
+      <i class="pi pi-home mr-1"></i>
+      <span class="">Inicio ></span>
+      <span class="ml-1 text-blue-500">Estoque</span>
+    </div>
+    <p-menubar [model]="items" />
+  </div>
+</div>
+<div class="w-screen mt-5">
+  <h3 class="ml-8 mb-4 font-semibold">Estoque</h3>
+  <div class="flex ml-8">
+    <div class="p-m-4">
+      <div class="flex-column flex">
+        <h1 class="mb-4">Listagem de Produtos</h1>
+        <div class="flex flex-row">
+          <input
+            type="text"
+            pInputText
+            placeholder="Pesquisar produto"
+            class="p-mr-2"
+          />
+          <button
+            pButton
+            type="button"
+            class="mr-5"
+            icon="pi pi-search"
+          ></button>
+          <div>
+            <span>Filtrar por:</span>
+            <p-dropdown
+              [options]="filterOptions"
+              placeholder="Selecione um filtro"
+              class="p-ml-2"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-5 w-screen">
+        @for(product of products; track product) {
+        <div class="">
+          <div
+            class="cursor-pointer mt-5 w-10rem h-10rem border-1 shadow-1 mr-8 flex justify-content-center align-items-center"
+          >
+            <i class="pi pi-upload text-4xl"></i>
+          </div>
+          <div class="flex flex-column">
+            <h2>{{ product.name }}</h2>
+            <p>Quantidade: {{ product.quantity }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
