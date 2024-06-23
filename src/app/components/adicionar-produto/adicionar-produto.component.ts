@@ -35,15 +35,15 @@ export class AdicionarProdutoComponent implements OnInit{
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      codigoEAN: ['', Validators.required],
-      nomeProduto: ['', Validators.required],
-      marca: ['', Validators.required],
+      codigoEAN: ['', [Validators.required, Validators.pattern(/^\d{14}$/)]],
+      nomeProduto: [{ value: '', disabled: true }, Validators.required],
+      marca: [{ value: '', disabled: true }, Validators.required],
       lote: ['', Validators.required],
       preco: ['', Validators.required],
       quantidade: ['', Validators.required],
       fornecedor: ['', Validators.required],
       nota: ['', Validators.required],
-      observacao: ['', Validators.required]
+      observacao: ['', Validators.required],
     });
   }
 
@@ -85,7 +85,7 @@ export class AdicionarProdutoComponent implements OnInit{
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',

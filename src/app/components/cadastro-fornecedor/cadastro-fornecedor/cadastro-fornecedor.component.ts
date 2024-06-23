@@ -76,7 +76,7 @@ export class CadastroFornecedorComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',

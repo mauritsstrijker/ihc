@@ -13,26 +13,50 @@
   <div class="flex ml-8">
     <p-card
       ><ng-template pTemplate="headless">
-        <div class="flex flex-row">
-          <div class="flex flex-column gap-4 mt-3">
-            <div class="flex flex-column">
-              <label>Nome da categoria</label>
-              <input pInputText />
-            </div>
-            <div class="flex flex-column">
-              <label>Descriçao</label>
-              <textarea
-                rows="5"
-                cols="30"
-                pInputTextarea
-                style="resize: none"
-              ></textarea>
-            </div>
+        <form [formGroup]="form" (ngSubmit)="salvar()">
+          <div class="flex flex-row">
+            <div class="flex flex-column gap-4 mt-3">
+              <div class="flex flex-column">
+                <label>Nome da categoria</label>
+                <input pInputText formControlName="categoria" required />
+              </div>
+              @if(form.get('categoria')?.invalid &&
+              (form.get('categoria')?.dirty || form.get('categoria')?.touched))
+              {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome da
+                categoria é obrigatório
+              </span>
+              }
+              <div class="flex flex-column">
+                <label>Descriçao</label>
+                <textarea
+                  rows="5"
+                  cols="30"
+                  pInputTextarea
+                  style="resize: none"
+                  formControlName="descricao"
+                  required
+                ></textarea>
+              </div>
+              @if(form.get('descricao')?.invalid &&
+              (form.get('descricao')?.dirty || form.get('descricao')?.touched))
+              {
+              <span class="error-text">
+                <i class="pi pi-exclamation-circle me-1 mr-2"></i>Descrição é
+                obrigatório
+              </span>
+              }
 
-            <div class="flex align-content-center justify-content-center">
-              <p-button label="Salvar" (onClick)="salvar()"></p-button>
+              <div class="flex align-content-center justify-content-center">
+                <p-button
+                  label="Salvar"
+                  (onClick)="salvar()"
+                  [disabled]="form.invalid"
+                ></p-button>
+              </div>
             </div>
-          </div></div></ng-template
+          </div></form></ng-template
     ></p-card>
   </div>
 </div>

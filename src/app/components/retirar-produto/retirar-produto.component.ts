@@ -77,7 +77,7 @@ export class RetirarProdutoComponent implements OnInit{
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',

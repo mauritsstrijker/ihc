@@ -67,7 +67,7 @@ export class CadastroProdutoComponent implements OnInit {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',

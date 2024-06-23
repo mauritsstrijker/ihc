@@ -109,7 +109,7 @@ export class HistoricoMovimentacaoComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',

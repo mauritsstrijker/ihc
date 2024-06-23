@@ -30,17 +30,14 @@
                   required
                 />
               </div>
-              <span
-                *ngIf="
-                  form.get('razaoSocial')?.invalid &&
-                  (form.get('razaoSocial')?.dirty ||
-                    form.get('razaoSocial')?.touched)
-                "
-                class="error-text"
-              >
+              @if(form.get('razaoSocial')?.invalid &&
+              (form.get('razaoSocial')?.dirty ||
+              form.get('razaoSocial')?.touched)) {
+              <span class="error-text">
                 <i class="pi pi-exclamation-circle me-1 mr-2"></i>Razão social é
                 obrigatória
               </span>
+              }
               <div class="flex flex-column">
                 <label>Nome Fantasia</label>
                 <input
@@ -50,17 +47,14 @@
                   required
                 />
               </div>
-              <span
-                *ngIf="
-                  form.get('nomeFantasia')?.invalid &&
-                  (form.get('nomeFantasia')?.dirty ||
-                    form.get('nomeFantasia')?.touched)
-                "
-                class="error-text"
-              >
+              @if(form.get('nomeFantasia')?.invalid &&
+              (form.get('nomeFantasia')?.dirty ||
+              form.get('nomeFantasia')?.touched)) {
+              <span class="error-text">
                 <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome fantasia
                 é obrigatório
               </span>
+              }
               <div class="flex flex-column">
                 <label>CNPJ</label>
                 <input
@@ -71,16 +65,13 @@
                   mask="00.000.000/0000-00"
                 />
               </div>
-              <span
-                *ngIf="
-                  form.get('cnpj')?.invalid &&
-                  (form.get('cnpj')?.dirty || form.get('cnpj')?.touched)
-                "
-                class="error-text"
-              >
+              @if(form.get('cnpj')?.invalid && (form.get('cnpj')?.dirty ||
+              form.get('cnpj')?.touched)) {
+              <span class="error-text">
                 <i class="pi pi-exclamation-circle me-1 mr-2"></i>CNPJ é
                 obrigatório
               </span>
+              }
               <div class="flex flex-column">
                 <label>Telefone</label>
                 <input
@@ -91,16 +82,13 @@
                   mask="(00) 0000-0000"
                 />
               </div>
-              <span
-                *ngIf="
-                  form.get('telefone')?.invalid &&
-                  (form.get('telefone')?.dirty || form.get('telefone')?.touched)
-                "
-                class="error-text"
-              >
+              @if(form.get('telefone')?.invalid && (form.get('telefone')?.dirty
+              || form.get('telefone')?.touched)) {
+              <span class="error-text">
                 <i class="pi pi-exclamation-circle me-1 mr-2"></i>Telefone é
                 obrigatório
               </span>
+              }
               <div class="flex flex-column">
                 <label>Nome do Representante</label>
                 <input
@@ -110,17 +98,14 @@
                   required
                 />
               </div>
-              <span
-                *ngIf="
-                  form.get('representante')?.invalid &&
-                  (form.get('representante')?.dirty ||
-                    form.get('representante')?.touched)
-                "
-                class="error-text"
-              >
+              @if(form.get('representante')?.invalid &&
+              (form.get('representante')?.dirty ||
+              form.get('representante')?.touched)) {
+              <span class="error-text">
                 <i class="pi pi-exclamation-circle me-1 mr-2"></i>Nome do
                 representante é obrigatório
               </span>
+              }
               <div class="flex align-content-center justify-content-center">
                 <p-button
                   label="Salvar"

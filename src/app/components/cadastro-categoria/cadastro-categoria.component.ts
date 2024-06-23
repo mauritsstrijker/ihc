@@ -6,6 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../core/services/toast.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
 @Component({
   selector: 'app-cadastro-categoria',
   standalone: true,
@@ -15,6 +17,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MenubarModule,
     InputTextModule,
     InputTextareaModule,
+    ReactiveFormsModule
   ],
   templateUrl: './cadastro-categoria.component.html',
   styleUrl: './cadastro-categoria.component.scss',
@@ -22,6 +25,14 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 export class CadastroCategoriaComponent {
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      categoria: ['', Validators.required],
+      descricao: ['', Validators.required]
+    });
+  }
 
   items = [
     {
@@ -59,7 +70,7 @@ export class CadastroCategoriaComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -111,12 +122,18 @@ export class CadastroCategoriaComponent {
   ];
 
   salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Categoria salva com sucesso',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
+    if (this.form.valid) {
+      this.toastService.notify(
+        'Confirmaçao',
+        'Categoria salva com sucesso',
+        'pi pi-check'
+      );
+      this.router.navigate(['estoque']);
+    }else {
+      Object.values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
   }
 }
+
