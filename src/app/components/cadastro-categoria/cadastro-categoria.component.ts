@@ -119,12 +119,34 @@ export class CadastroCategoriaComponent {
         this.router.navigate(['estoque']);
       },
     },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          // styleClass: 'custom-logout-icon',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
+    },
   ];
 
   salvar() {
     if (this.form.valid) {
       this.toastService.notify(
-        'Confirmaçao',
+        'Confirmação',
         'Categoria salva com sucesso',
         'pi pi-check'
       );

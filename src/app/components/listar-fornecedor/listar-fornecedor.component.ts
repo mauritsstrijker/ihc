@@ -52,7 +52,7 @@ export class ListarFornecedorComponent {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Voce deseja deletar este fornecedor?',
-      header: 'Confirmaçao',
+      header: 'Confirmação',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: 'bg-green-600 p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-text',
@@ -61,7 +61,7 @@ export class ListarFornecedorComponent {
 
       accept: () => {
         this.toastService.notify(
-          'Confirmaçao',
+          'Confirmação',
           'Fornecedor deletado com sucesso.'
         );
       },
@@ -132,7 +132,7 @@ export class ListarFornecedorComponent {
   ];
 
   excluir() {
-    this.toastService.notify('Confirmaçao', 'Fornecedor deletado com sucesso!');
+    this.toastService.notify('Confirmação', 'Fornecedor deletado com sucesso!');
   }
 
   items = [
@@ -171,7 +171,7 @@ export class ListarFornecedorComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -220,12 +220,34 @@ export class ListarFornecedorComponent {
         this.router.navigate(['estoque']);
       },
     },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          // styleClass: 'custom-logout-icon',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
+    },
   ];
 
   // salvar() {
   //   //if formulario valido
   //   this.toastService.notify(
-  //     'Confirmaçao',
+  //     'Confirmação',
   //     'Movimentaçao salva',
   //     'pi pi-check'
   //   );

@@ -52,7 +52,7 @@ export class ListarCategoriaComponent {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Voce deseja deletar esta categoria?',
-      header: 'Confirmaçao',
+      header: 'Confirmação',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: 'bg-green-600 p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-text',
@@ -61,7 +61,7 @@ export class ListarCategoriaComponent {
 
       accept: () => {
         this.toastService.notify(
-          'Confirmaçao',
+          'Confirmação',
           'Categoria deletada com sucesso.'
         );
       },
@@ -70,41 +70,41 @@ export class ListarCategoriaComponent {
 
   categorias = [
     {
-      nome: 'Tecnologia',
-      descricao: 'Tudo sobre tecnologia, gadgets e inovações.',
+      nome: 'Frutas',
+      descricao: 'Descrição da categoria de frutas.',
     },
     {
-      nome: 'Saúde',
-      descricao: 'Dicas e informações sobre saúde e bem-estar.',
+      nome: 'Legumes',
+      descricao: 'Descrição da categoria de legumes.',
     },
     {
-      nome: 'Educação',
-      descricao: 'Recursos e notícias sobre educação e aprendizado.',
+      nome: 'Verduras',
+      descricao: 'Descrição da categoria de verduras.',
     },
     {
-      nome: 'Esportes',
-      descricao: 'Últimas notícias e atualizações sobre o mundo dos esportes.',
+      nome: 'Carnes (bovinos, suínos, aves)',
+      descricao: 'Descrição da categoria de carnes.',
     },
     {
-      nome: 'Entretenimento',
-      descricao: 'Novidades sobre filmes, séries, música e cultura pop.',
+      nome: 'Peixes e frutos do mar',
+      descricao: 'Descrição da categoria de peixes.',
     },
     {
-      nome: 'Negócios',
-      descricao: 'Informações sobre economia, empresas e finanças.',
+      nome: 'Massas congeladas',
+      descricao: 'Descrição da categoria de massas congeladas.',
     },
     {
-      nome: 'Viagem',
-      descricao: 'Dicas de viagem, destinos e experiências ao redor do mundo.',
+      nome: 'Farinhas',
+      descricao: 'Descrição da categoria de farinhas.',
     },
     {
-      nome: 'Culinária',
-      descricao: 'Receitas, dicas e novidades do mundo gastronômico.',
+      nome: 'Queijos',
+      descricao: 'Descrição da categoria de queijos.',
     },
   ];
 
   excluir() {
-    this.toastService.notify('Confirmaçao', 'Fornecedor deletado com sucesso!');
+    this.toastService.notify('Confirmação', 'Fornecedor deletado com sucesso!');
   }
 
   items = [
@@ -143,7 +143,7 @@ export class ListarCategoriaComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -192,12 +192,34 @@ export class ListarCategoriaComponent {
         this.router.navigate(['estoque']);
       },
     },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          // styleClass: 'custom-logout-icon',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
+    },
   ];
 
   // salvar() {
   //   //if formulario valido
   //   this.toastService.notify(
-  //     'Confirmaçao',
+  //     'Confirmação',
   //     'Movimentaçao salva',
   //     'pi pi-check'
   //   );

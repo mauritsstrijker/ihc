@@ -3,14 +3,14 @@
   <div class="h-full flex align-items-center justify-content-between ml-5">
     <div>
       <i class="pi pi-home mr-1"></i>
-      <span class="">Inicio ></span>
+      <span class="" routerLink="/home">Inicio ></span>
       <span class="ml-1 text-blue-500">Perfil</span>
     </div>
     <p-menubar [model]="items" />
   </div>
 </div>
 <div class="w-screen mt-5">
-  <h3 class="ml-8 mb-4 font-semibold">Perfil</h3>
+  <h3 class="ml-8 mb-4 font-semibold text-4xl">Perfil</h3>
   <div class="flex ml-8">
     <div class="p-m-4">
       <div class="flex-column flex">
@@ -19,19 +19,19 @@
             <div class="p-col">
               <p-card header="Dados">
                 <div class="p-fluid">
-                  <div class="p-field">
+                  <div class="p-field mb-3">
                     <label for="nome">Nome Completo</label>
                     <input id="nome" type="text" pInputText />
                   </div>
-                  <div class="p-field">
+                  <div class="p-field mb-3">
                     <label for="cnpj">CNPJ</label>
                     <input id="cnpj" type="text" pInputText />
                   </div>
-                  <div class="p-field">
+                  <div class="p-field mb-3">
                     <label for="contato">Contato</label>
                     <input id="contato" type="text" pInputText />
                   </div>
-                  <div class="p-field mb-2">
+                  <div class="p-field mb-4">
                     <label for="email">E-mail</label>
                     <input id="email" type="text" pInputText />
                   </div>
@@ -39,41 +39,96 @@
                     pButton
                     type="button"
                     label="Salvar"
-                    (onClick)="this.toastService.notify('', '')"
+                    (onClick)="
+                      this.toastService.notify(
+                        'Confirmação',
+                        'Dados alterados com sucesso'
+                      )
+                    "
                     class="p-button-warning"
                   ></p-button>
                 </div>
               </p-card>
             </div>
-
-            <div class="p-col">
-              <p-card header="Atualizar senha">
-                <div class="p-fluid">
-                  <div class="p-field">
-                    <label for="senha-atual">Senha atual</label>
-                    <input id="senha-atual" type="password" pInputText />
+            <form [formGroup]="form" (ngSubmit)="salvar()">
+              <div class="p-col">
+                <p-card header="Atualizar senha">
+                  <div class="p-fluid">
+                    <div class="p-field mb-3">
+                      <label for="senha-atual">Senha atual</label>
+                      <input
+                        id="senha-atual"
+                        type="password"
+                        pInputText
+                        formControlName="senhaAtual"
+                        required
+                      />
+                    </div>
+                    @if(form.get('senhaAtual')?.invalid &&
+                    (form.get('senhaAtual')?.dirty ||
+                    form.get('senhaAtual')?.touched)) {
+                    <span class="error-text">
+                      <i class="pi pi-exclamation-circle me-1 mr-2 mb-5"></i
+                      >Senha atual é obrigatória
+                    </span>
+                    }
+                    <div class="p-field mb-3">
+                      <label for="nova-senha">Nova senha</label>
+                      <input
+                        id="nova-senha"
+                        type="password"
+                        pInputText
+                        formControlName="senhaNova"
+                        required
+                      />
+                    </div>
+                    @if(form.get('senhaNova')?.invalid &&
+                    (form.get('senhaNova')?.dirty ||
+                    form.get('senhaNova')?.touched)) {
+                    <span class="error-text">
+                      <i class="pi pi-exclamation-circle me-1 mr-2 mb-5"></i
+                      >Senha nova é obrigatória
+                    </span>
+                    }
+                    <div class="p-field mb-4">
+                      <label for="confirmar-senha">Confirme a nova senha</label>
+                      <input
+                        id="confirmar-senha"
+                        type="password"
+                        pInputText
+                        formControlName="senhaNova2"
+                        required
+                      />
+                    </div>
+                    @if(form.get('senhaNova2')?.invalid &&
+                    (form.get('senhaNova2')?.dirty ||
+                    form.get('senhaNova2')?.touched)) {
+                    <span class="error-text">
+                      <i class="pi pi-exclamation-circle me-1 mr-2 mb-5"></i
+                      >Confirmação de senha é obrigatória
+                    </span>
+                    }
+                    <br />
+                    <p-button
+                      (onClick)="
+                        this.toastService.notify(
+                          'Confirmação',
+                          'Senha nova alterada com sucesso'
+                        )
+                      "
+                      pButton
+                      type="button"
+                      label="Salvar"
+                      class="p-button-warning"
+                      [disabled]="form.invalid"
+                    ></p-button>
                   </div>
-                  <div class="p-field">
-                    <label for="nova-senha">Nova senha</label>
-                    <input id="nova-senha" type="password" pInputText />
-                  </div>
-                  <div class="p-field mb-2">
-                    <label for="confirmar-senha">Confirme a nova senha</label>
-                    <input id="confirmar-senha" type="password" pInputText />
-                  </div>
-                  <p-button
-                    (onClick)="this.toastService.notify('', '')"
-                    pButton
-                    type="button"
-                    label="Salvar"
-                    class="p-button-warning"
-                  ></p-button>
-                </div>
-              </p-card>
-            </div>
+                </p-card>
+              </div>
+            </form>
           </div>
 
-          <div class="p-col">
+          <div class="p-col mb-5">
             <p-card header="Delete sua conta">
               <p class="mb-2">
                 Depois que sua conta for excluída, todos os seus recursos e
@@ -83,7 +138,8 @@
                 pButton
                 type="button"
                 label="Deletar Conta"
-                class="p-button-danger"
+                class="bg-red-500 border-none"
+                styleClass="bg-red-500 border-none"
                 (click)="confirm2($event)"
               ></p-button>
             </p-card>

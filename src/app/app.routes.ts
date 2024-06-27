@@ -7,6 +7,10 @@ import { CadastroCategoriaComponent } from './components/cadastro-categoria/cada
 import { AdicionarProdutoComponent } from './components/adicionar-produto/adicionar-produto.component';
 import { RetirarProdutoComponent } from './components/retirar-produto/retirar-produto.component';
 import { HistoricoMovimentacaoComponent } from './components/historico-movimentacao/historico-movimentacao.component';
+import { PerfilComponent } from './components/perfil/perfil.component'
+import { EstoqueComponent } from './components/estoque/estoque.component'
+import { ListarFornecedorComponent } from './components/listar-fornecedor/listar-fornecedor.component'
+import { ListarCategoriaComponent } from './components/listar-categoria/listar-categoria.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +21,9 @@ export const routes: Routes = [
   { path: 'adicionar/produto', component: AdicionarProdutoComponent },
   { path: 'retirar/produto', component: RetirarProdutoComponent },
   { path: 'historico', component: HistoricoMovimentacaoComponent },
-  { path: 'estoque', component: CadastroProdutoComponent },
-  { path: 'perfil', component: CadastroProdutoComponent },
+  { path: 'estoque', component: EstoqueComponent },
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'listar/fornecedor', component: ListarFornecedorComponent},
+  { path: 'listar/categoria', component: ListarCategoriaComponent}
 ];
+

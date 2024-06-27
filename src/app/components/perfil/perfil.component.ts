@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -9,6 +9,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-perfil',
@@ -20,24 +23,34 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     DropdownModule,
     ConfirmDialogModule,
+    ReactiveFormsModule
   ],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.scss',
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit{
   router = inject(Router);
   toastService = inject(ToastService);
+  form!: FormGroup;
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      senhaAtual: ['', Validators.required],
+      senhaNova: ['', Validators.required],
+      senhaNova2: ['', Validators.required],
+    });
+  }
+  ngOnInit(): void {}
 
   confirm2(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Voce realmente deseja excluir sua conta?',
-      header: 'Confirmaçao',
+      header: 'Confirmação',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: 'p-button-danger p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-text',
@@ -47,15 +60,16 @@ export class PerfilComponent {
       accept: () => {
         this.messageService.add({
           severity: 'info',
-          summary: 'Confirmed',
-          detail: 'Record deleted',
+          summary: 'Ação confirmada',
+          detail: 'Conta deletada',
         });
+        this.router.navigate(['/login']);
       },
       reject: () => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Rejected',
-          detail: 'You have rejected',
+          summary: 'Ação cancelada',
+          detail: 'Sua conta não foi deletada',
         });
       },
     });
@@ -115,7 +129,7 @@ export class PerfilComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -164,15 +178,42 @@ export class PerfilComponent {
         this.router.navigate(['estoque']);
       },
     },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          // styleClass: 'custom-logout-icon',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
+    },
   ];
 
   salvar() {
-    //if formulario valido
-    this.toastService.notify(
-      'Confirmaçao',
-      'Produto salvo com sucesso',
-      'pi pi-check'
-    );
-    this.router.navigate(['estoque']);
+    if (this.form.valid) {
+      this.toastService.notify(
+        'Confirmação',
+        'Perfil salvo com sucesso',
+        'pi pi-check'
+      );
+      this.router.navigate(['estoque']);
+    } else {
+      Object.values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
   }
 }

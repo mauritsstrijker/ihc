@@ -2,7 +2,7 @@
   <div class="h-full flex align-items-center justify-content-between ml-5">
     <div>
       <i class="pi pi-home mr-1 text-blue-500"></i>
-      <span class="text-blue-500">Inicio</span>
+      <span class="text-blue-500" routerLink="/home">Inicio</span>
     </div>
     <p-menubar [model]="items" />
   </div>
@@ -27,7 +27,7 @@
               Seja bem-vindo ao nosso sistema
             </span>
             <span class="text-white">
-              Sua solucao completa para controle de estoque! Simplifique e
+              Sua solução completa para controle de estoque! Simplifique e
               otimize sua gestao de inventario conosco. Em nossa plataforma,
               oferecemos ferramentas intuitivas e poderosas para acompanhar,
               gerenciar e otimizar seu estoque.
@@ -58,10 +58,15 @@
       </div>
       <div class="flex flex-column mt-5 gap-5">
         <div class="flex flex-row justify-content-around">
-          <p-button [styleClass]="'w-10rem h-4rem'" label="Estoque"></p-button>
+          <p-button
+            [styleClass]="'w-10rem h-4rem'"
+            label="Estoque"
+            routerLink="/estoque"
+          ></p-button>
           <p-button
             [styleClass]="'w-10rem h-4rem'"
             label="Movimentacoes"
+            routerLink="/historico"
           ></p-button>
         </div>
 
@@ -69,20 +74,24 @@
           <p-button
             [styleClass]="'w-10rem h-4rem'"
             label="Cadastrar Produto"
+            routerLink="/cadastrar/produto"
           ></p-button>
           <p-button
             [styleClass]="'w-10rem h-4rem'"
             label="Cadastrar Fornecedor"
+            routerLink="/cadastrar/fornecedor"
           ></p-button>
         </div>
         <div class="flex flex-row justify-content-around">
           <p-button
             [styleClass]="'w-10rem h-4rem'"
             label="Adicionar Produto"
+            routerLink="/adicionar/produto"
           ></p-button>
           <p-button
             [styleClass]="'w-10rem h-4rem'"
             label="Retirar Produto"
+            routerLink="/retirar/produto"
           ></p-button>
         </div>
       </div>

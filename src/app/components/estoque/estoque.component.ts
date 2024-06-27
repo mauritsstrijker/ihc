@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastService } from '../../core/services/toast.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-estoque',
@@ -16,6 +17,7 @@ import { DropdownModule } from 'primeng/dropdown';
     MenubarModule,
     InputTextModule,
     DropdownModule,
+    PaginatorModule
   ],
   templateUrl: './estoque.component.html',
   styleUrl: './estoque.component.scss',
@@ -78,7 +80,7 @@ export class EstoqueComponent {
       ],
     },
     {
-      label: 'Movimentacao',
+      label: 'Movimentação',
       items: [
         {
           label: 'Adicionar Produto',
@@ -127,12 +129,34 @@ export class EstoqueComponent {
         this.router.navigate(['estoque']);
       },
     },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          // styleClass: 'custom-logout-icon',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
+    },
   ];
 
   salvar() {
     //if formulario valido
     this.toastService.notify(
-      'Confirmaçao',
+      'Confirmação',
       'Produto salvo com sucesso',
       'pi pi-check'
     );

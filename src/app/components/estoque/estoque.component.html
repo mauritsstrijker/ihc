@@ -2,24 +2,23 @@
   <div class="h-full flex align-items-center justify-content-between ml-5">
     <div>
       <i class="pi pi-home mr-1"></i>
-      <span class="">Inicio ></span>
+      <span class="" routerLink="/home">Inicio ></span>
       <span class="ml-1 text-blue-500">Estoque</span>
     </div>
     <p-menubar [model]="items" />
   </div>
 </div>
 <div class="w-screen mt-5">
-  <h3 class="ml-8 mb-4 font-semibold">Estoque</h3>
   <div class="flex ml-8">
     <div class="p-m-4">
       <div class="flex-column flex">
-        <h1 class="mb-4">Listagem de Produtos</h1>
+        <h1 class="mb-4 text-4xl font-semibold">Listagem de Produtos</h1>
         <div class="flex flex-row">
           <input
             type="text"
             pInputText
             placeholder="Pesquisar produto"
-            class="p-mr-2"
+            class="p-mr-2 mr-2"
           />
           <button
             pButton
@@ -28,7 +27,7 @@
             icon="pi pi-search"
           ></button>
           <div>
-            <span>Filtrar por:</span>
+            <span class="mr-2">Filtrar por:</span>
             <p-dropdown
               [options]="filterOptions"
               placeholder="Selecione um filtro"
@@ -37,17 +36,21 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-wrap gap-5 w-screen">
+      <!-- Adicione uma margem superior aqui -->
+      <div class="flex flex-wrap gap-5 w-screen mt-4">
         @for(product of products; track product) {
-        <div class="">
+        <div
+          class="flex flex-column align-items-center justify-content-between p-3 border-round-lg shadow-2 w-20rem h-20rem"
+        >
           <div
-            class="cursor-pointer mt-5 w-10rem h-10rem border-1 shadow-1 mr-8 flex justify-content-center align-items-center"
+            class="cursor-pointer w-full h-12rem border-1 flex justify-content-center align-items-center"
+            style="border-color: orange"
           >
             <i class="pi pi-upload text-4xl"></i>
           </div>
-          <div class="flex flex-column">
-            <h2>{{ product.name }}</h2>
-            <p>Quantidade: {{ product.quantity }}</p>
+          <div class="flex flex-column mt-3 text-center">
+            <h2 class="text-lg">{{ product.name }}</h2>
+            <p class="mt-2">Quantidade: {{ product.quantity }}</p>
           </div>
         </div>
         }

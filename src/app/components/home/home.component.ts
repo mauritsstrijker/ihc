@@ -9,7 +9,7 @@ import { MenubarModule } from 'primeng/menubar';
   standalone: true,
   imports: [CardModule, ButtonModule, MenubarModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   router = inject(Router);
@@ -98,6 +98,27 @@ export class HomeComponent {
       command: () => {
         this.router.navigate(['estoque']);
       },
+    },
+    {
+      label: 'Usuário',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Perfil',
+          icon: 'pi pi-user-edit',
+          command: () => {
+            this.router.navigate(['perfil']);
+          },
+        },
+        {
+          label: 'Sair',
+          icon: 'pi pi-sign-out',
+          styleClass: 'bg-red-400',
+          command: () => {
+            this.router.navigate(['login']);
+          },
+        },
+      ],
     },
   ];
 }
