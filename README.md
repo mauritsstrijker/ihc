@@ -30,7 +30,7 @@ npm -v
 
 - ng serve
 
-Ir para a URL: **http://localhost:4200/**
+Ir para a URL: **http://localhost:4200/home**
 
 ## Funcionalidades
 
