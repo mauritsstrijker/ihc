@@ -11,6 +11,7 @@ import { PerfilComponent } from './components/perfil/perfil.component'
 import { EstoqueComponent } from './components/estoque/estoque.component'
 import { ListarFornecedorComponent } from './components/listar-fornecedor/listar-fornecedor.component'
 import { ListarCategoriaComponent } from './components/listar-categoria/listar-categoria.component'
+import { SobreNosComponent } from './components/sobre-nos/sobre-nos.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: 'estoque', component: EstoqueComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'listar/fornecedor', component: ListarFornecedorComponent},
-  { path: 'listar/categoria', component: ListarCategoriaComponent}
+  { path: 'listar/categoria', component: ListarCategoriaComponent},
+  { path: 'sobrenos', component: SobreNosComponent},
 ];
 

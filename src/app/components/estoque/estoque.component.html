@@ -5,7 +5,7 @@
       <span class="" routerLink="/home">Inicio ></span>
       <span class="ml-1 text-blue-500">Estoque</span>
     </div>
-    <p-menubar [model]="items" />
+    <p-menubar [model]="items"></p-menubar>
   </div>
 </div>
 <div class="w-screen mt-5">
@@ -36,9 +36,9 @@
           </div>
         </div>
       </div>
-      <!-- Adicione uma margem superior aqui -->
       <div class="flex flex-wrap gap-5 w-screen mt-4">
-        @for(product of products; track product) {
+        <!-- Utilize paginatedProducts aqui -->
+        @for(product of paginatedProducts; track product) {
         <div
           class="flex flex-column align-items-center justify-content-between p-3 border-round-lg shadow-2 w-20rem h-20rem"
         >
@@ -54,6 +54,11 @@
           </div>
         </div>
         }
+        <p-paginator
+          [rows]="rows"
+          [totalRecords]="totalRecords"
+          (onPageChange)="onPageChange($event)"
+        ></p-paginator>
       </div>
     </div>
   </div>

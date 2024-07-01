@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MenubarModule } from 'primeng/menubar';
+import { ThemeService } from '../../core/services/theme.service'
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { MenubarModule } from 'primeng/menubar';
 })
 export class HomeComponent {
   router = inject(Router);
+  themeService = inject(ThemeService);
 
   items = [
     {
@@ -121,4 +123,9 @@ export class HomeComponent {
       ],
     },
   ];
+
+  // Função para trocar o tema
+  onSwitchTheme() {
+    this.themeService.switchTheme();
+  }
 }

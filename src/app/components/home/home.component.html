@@ -7,6 +7,9 @@
     <p-menubar [model]="items" />
   </div>
 </div>
+<button pButton type="button" class="ml-5 mt-2" (click)="onSwitchTheme()">
+  Modo Escuro
+</button>
 <div class="w-screen flex flex-row">
   <div class="w-6 p-8">
     <p-card>
@@ -48,6 +51,19 @@
       <div>
         <i class="pi pi-envelope mr-2"></i>
         <span>ajuda&#64;estoque360.com</span>
+      </div>
+      <div>
+        <a href="../../../assets/ManualDeUsuario.pdf" download>
+          <i class="pi pi-book mr-2"></i>
+          <span>PDF com Manual do Usuário</span>
+        </a>
+      </div>
+      <div>
+        <i
+          class="pi pi-users mr-2 text-blue-800 font-semibold"
+          routerLink="/sobrenos"
+        ></i>
+        <span class="text-blue-800 font-semibold">Sobre Nós</span>
       </div>
     </div>
   </div>

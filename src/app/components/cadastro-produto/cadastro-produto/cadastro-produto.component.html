@@ -83,7 +83,13 @@
               }
               <div class="flex flex-column">
                 <label>Fornecedor</label>
-                <input pInputText formControlName="fornecedor" />
+                <select formControlName="fornecedor" pInputText>
+                  <option value="Selecione" disabled selected>Selecione</option>
+                  <option value="Oesa">Oesa</option>
+                  <option value="Edson">Edson</option>
+                  <option value="Segalas">Segalas</option>
+                  <option value="Sadia">Sadia</option>
+                </select>
               </div>
               @if(form.get('fornecedor')?.invalid &&
               (form.get('fornecedor')?.dirty ||
